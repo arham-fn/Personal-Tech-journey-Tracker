@@ -1,5 +1,5 @@
 import React from 'react';
-import { BrowserRouter, Routes, Route, Outlet } from 'react-router-dom';
+import { BrowserRouter, Routes, Route, Outlet, Navigate } from 'react-router-dom';
 import Sidebar from './components/Sidebar';
 import Overview from './pages/Overview';
 import Roadmap from './pages/Roadmap';
@@ -25,6 +25,7 @@ const App: React.FC = () => (
     <Routes>
       <Route path="/" element={<Layout />}> 
         <Route index element={<Overview />} />
+        <Route path="overview" element={<Navigate to="/" replace />} />
         <Route path="roadmap" element={<Roadmap />} />
         <Route path="plan" element={<WeeklyPlan />} />
         <Route path="install" element={<InstallQueue />} />
@@ -33,6 +34,8 @@ const App: React.FC = () => (
         <Route path="career" element={<CareerLab />} />
         <Route path="goals" element={<Goals />} />
         <Route path="settings" element={<Settings />} />
+        {/* Fallback wildcard for any unknown path */}
+        <Route path="*" element={<Navigate to="/" replace />} />
       </Route>
     </Routes>
   </BrowserRouter>
